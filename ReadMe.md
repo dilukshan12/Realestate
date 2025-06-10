@@ -24,6 +24,10 @@ This project is a **Responsive Single Page Application (SPA)** for an estate age
 I got this idea from
 - [You Tube Link](https://www.youtube.com/watch?v=mUlfyK0Hhok)
 
+
+## starting method
+-Npm run dev
+
 ## Author
 -Dilukshan
 
