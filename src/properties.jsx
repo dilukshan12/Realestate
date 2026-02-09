@@ -31,6 +31,7 @@ const properties = [
     beds: 4,
     baths: 3,
     sqft: 2800,
+    type: "Villa",
     images: [ ],
   },
   {
@@ -44,6 +45,7 @@ const properties = [
     beds: 5,
     baths: 4,
     sqft: 3500,
+    type: "Villa",
     images: [image5, image1, image9, image7 ,image4, image5,  ],
   },
   {
@@ -57,6 +59,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2000,
+    type: "Apartment",
     images: [image4, image5, image7 ,image3, image6, image5, image1],
   },
   {
@@ -70,6 +73,7 @@ const properties = [
     beds: 4,
     baths: 3.5,
     sqft: 3200,
+    type: "House",
     images: [image2, image4, image4, image10,image5,image3,image12],
   },
   {
@@ -83,6 +87,7 @@ const properties = [
     beds: 6,
     baths: 5,
     sqft: 4500,
+    type: "House",
     images: [image8, image4, image5, image4, image5, image7,image10],
   },
   {
@@ -96,6 +101,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2550,
+    type: "House",
     images: [image10,image4, image5, image7, image4, image5],
   },
   {
@@ -109,6 +115,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2500,
+    type: "House",
     images: [image5, image7, image12,image4, image5, image7, image1],
   },
   {
@@ -122,6 +129,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2400,
+    type: "Apartment",
     images: [image3,image4, image5, image7, image4, image5, image9],
   },
   {
@@ -135,6 +143,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2150,
+    type: "Apartment",
     images: [image4, image7, image5, image11,image4, image5, image7],
   },
   {
@@ -148,6 +157,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2850,
+    type: "House",
     images: [image12, image4, image5, image7, image8,image3,image4,],
   },
   {
@@ -161,6 +171,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2200,
+    type: "Apartment",
     images: [image1, image4, image5, image7, image8,image3,image4],
   },
   {
@@ -174,6 +185,7 @@ const properties = [
     beds: 3,
     baths: 2,
     sqft: 2600,
+    type: "House",
     images: [ image5, image3,image4,image5, image8 ,image1, image7],
   },
 ];

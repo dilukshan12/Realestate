@@ -7,12 +7,27 @@ import { useState } from "react";
 
 function App() {
   const [selectedProperty, setSelectedProperty] = useState(null);
+  const [searchCriteria, setSearchCriteria] = useState({
+    location: '',
+    type: '',
+    minPrice: '',
+    maxPrice: '',
+    minBeds: '',
+    maxBeds: '',
+    minBaths: '',
+    maxBaths: '',
+    minSqft: '',
+    maxSqft: '',
+  });
 
   return (
     <div className="min-h-screen w-full bg-gray-50">
-      <Home />
+      <Home searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />
 
-      <FeaturedProperties setSelectedProperty={setSelectedProperty} />
+      <FeaturedProperties 
+        setSelectedProperty={setSelectedProperty} 
+        searchCriteria={searchCriteria}
+      />
 
       <Contact />
 

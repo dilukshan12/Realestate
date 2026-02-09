@@ -2,14 +2,44 @@ import React from "react";
 import properties from "../properties";
 import { FaBath, FaBed, FaHeart, FaRuler } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { searchProperties } from "../utils/searchUtils";
 
-const FeaturedProperties = ({ setSelectedProperty }) => {
+const FeaturedProperties = ({ setSelectedProperty, searchCriteria }) => {
+  // Convert string inputs to numbers for search function
+  const normalizedCriteria = {
+    location: searchCriteria.location || '',
+    type: searchCriteria.type || '',
+    minPrice: searchCriteria.minPrice ? parseFloat(searchCriteria.minPrice) : '',
+    maxPrice: searchCriteria.maxPrice ? parseFloat(searchCriteria.maxPrice) : '',
+    minBeds: searchCriteria.minBeds ? parseInt(searchCriteria.minBeds) : '',
+    maxBeds: searchCriteria.maxBeds ? parseInt(searchCriteria.maxBeds) : '',
+    minBaths: searchCriteria.minBaths ? parseFloat(searchCriteria.minBaths) : '',
+    maxBaths: searchCriteria.maxBaths ? parseFloat(searchCriteria.maxBaths) : '',
+    minSqft: searchCriteria.minSqft ? parseInt(searchCriteria.minSqft) : '',
+    maxSqft: searchCriteria.maxSqft ? parseInt(searchCriteria.maxSqft) : '',
+  };
+
+  const filteredProperties = searchProperties(properties, normalizedCriteria);
+
   return (
     <section className="max-w-7xl mx-auto py-16 px-4">
-      <h2 className="text-3xl font-bold mb-8">Featured Properties</h2>
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-3xl font-bold">
+          {filteredProperties.length > 0 ? 'Featured Properties' : 'No Properties Found'}
+        </h2>
+        <span className="text-gray-600">
+          {filteredProperties.length} {filteredProperties.length === 1 ? 'property' : 'properties'} found
+        </span>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {properties.map((property) => (
+      {filteredProperties.length === 0 ? (
+        <div className="text-center py-16">
+          <p className="text-gray-500 text-lg mb-4">No properties match your search criteria.</p>
+          <p className="text-gray-400">Try adjusting your search filters.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProperties.map((property) => (
           <div
             key={property.id}
             className="bg-white rounded-2xl drop-shadow-lg overflow-hidden hover:drop-shadow-xl hover:scale-105 transition-all duration-300 relative group cursor-pointer"
@@ -58,7 +88,8 @@ const FeaturedProperties = ({ setSelectedProperty }) => {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+      )}
     </section>
   );
 };
