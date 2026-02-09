@@ -79,13 +79,7 @@ const Home = ({ searchCriteria, setSearchCriteria }) => {
               </button>
             </div>
 
-            {/* Advanced Search Toggle */}
-            <button
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              className="text-white text-sm mb-4 hover:text-blue-300 transition-colors underline"
-            >
-              {showAdvanced ? 'Hide' : 'Show'} 
-            </button>
+
 
             {/* Advanced Search Options */}
             {showAdvanced && (
