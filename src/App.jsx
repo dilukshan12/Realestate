@@ -3,6 +3,7 @@ import FeaturedProperties from "./components/FeaturedProperties";
 import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./components/Home.jsx";
+import { FavoritesProvider } from "./context/FavoritesContext";
 import { useState } from "react";
 
 function App() {
@@ -21,25 +22,27 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen w-full bg-gray-50">
-      <Home searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />
+    <FavoritesProvider>
+      <div className="min-h-screen w-full bg-gray-50">
+        <Home searchCriteria={searchCriteria} setSearchCriteria={setSearchCriteria} />
 
-      <FeaturedProperties 
-        setSelectedProperty={setSelectedProperty} 
-        searchCriteria={searchCriteria}
-      />
-
-      <Contact />
-
-      <Footer />
-
-      {selectedProperty && (
-        <PropertyModal
-          properties={[selectedProperty]}
-          onClose={() => setSelectedProperty(null)}
+        <FeaturedProperties 
+          setSelectedProperty={setSelectedProperty} 
+          searchCriteria={searchCriteria}
         />
-      )}
-    </div>
+
+        <Contact />
+
+        <Footer />
+
+        {selectedProperty && (
+          <PropertyModal
+            properties={[selectedProperty]}
+            onClose={() => setSelectedProperty(null)}
+          />
+        )}
+      </div>
+    </FavoritesProvider>
   );
 }
 

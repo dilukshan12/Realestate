@@ -8,18 +8,22 @@ import {
   FaRuler,
 } from "react-icons/fa";
 import { FaLocationDot, FaX } from "react-icons/fa6";
+import { useFavorites } from "../context/FavoritesContext";
 
 const PropertyModal = ({ onClose, properties }) => {
   const [currentPropertyIndex, setCurrentPropertyIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { isFavorite, addToFavorites, removeFromFavorites, addToFavoritesStorageMethod, removeFromFavoritesStorageMethod } = useFavorites();
 
   if (!properties || properties.length === 0) {
     return null;
   }
 
   const currentProperty = properties[currentPropertyIndex];
-  const images = currentProperty.images || [];
+  const favoriteStatus = isFavorite(currentProperty?.id);
+  const images = currentProperty.images && currentProperty.images.length > 0 
+    ? currentProperty.images 
+    : [currentProperty.image];
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -28,6 +32,29 @@ const PropertyModal = ({ onClose, properties }) => {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
+
+  // Toggle favorite using Context API method
+  const handleToggleFavoriteContext = (e) => {
+    e.stopPropagation();
+    if (favoriteStatus) {
+      removeFromFavorites(currentProperty.id);
+    } else {
+      addToFavorites(currentProperty);
+    }
+  };
+
+  // Toggle favorite using localStorage method (direct)
+  const handleToggleFavoriteStorage = (e) => {
+    e.stopPropagation();
+    if (favoriteStatus) {
+      removeFromFavoritesStorageMethod(currentProperty.id);
+    } else {
+      addToFavoritesStorageMethod(currentProperty);
+    }
+  };
+
+  // Use Context API method by default, but both are available
+  const handleToggleFavorite = handleToggleFavoriteContext;
 
   return (
     <div
@@ -68,12 +95,13 @@ const PropertyModal = ({ onClose, properties }) => {
 
           <div className="absolute bottom-4 right-4 flex items-center gap-4">
             <button
-              onClick={() => setIsFavorite(!isFavorite)}
-              className={`bg-white/80 p-2 rounded-full ${
-                isFavorite ? "text-red-500" : "text-gray-500"
-              }`}
+              onClick={handleToggleFavorite}
+              className={`bg-white/80 p-2 rounded-full transition-colors ${
+                favoriteStatus ? "text-red-500" : "text-gray-500"
+              } hover:text-red-500`}
+              title={favoriteStatus ? "Remove from favorites" : "Add to favorites"}
             >
-              <FaHeart />
+              <FaHeart className={favoriteStatus ? "fill-current" : ""} />
             </button>
             <div className="bg-black/50 text-white px-3 py-1 rounded-full">
               {currentImageIndex + 1} / {images.length}
